@@ -4,11 +4,9 @@ console.log("loaded")
 
 <template>
 <section class="grid" style="min-height: 100vh;">
-    <aside>
-        Sidebar
-    </aside>
+    <LayoutSidebar />
     <div>
-        <slot/>
+        <slot />
     </div>
 </section>
 </template>
