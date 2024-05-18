@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss', 
     'shadcn-nuxt', 
     [
-
       '@nuxtjs/google-fonts',
       {
         families:{
@@ -14,9 +13,9 @@ export default defineNuxtConfig({
             ital:[300]
           }
         }
-        
       }
     ],
+    'nuxt-icon'
     ],
   shadcn: {
    

@@ -7,7 +7,9 @@
     <NuxtLink to="/" class="mb-10 block">
         <NuxtImg class="mx-auto" src="/logo.svg" alt="" width="100px" />
     </NuxtLink>
-    <UiButton>Send</UiButton>
+   <button class="absolute top-2 right-3 transition-colors hover:text-purple-400" >
+    <Icon name="line-md:logout" size="22px" />
+   </button>
   </aside>
 </template>
 
