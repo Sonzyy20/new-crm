@@ -31,7 +31,7 @@ export const MENU_DATA: IMenuItem[] = [{
 },
 {
     icon: 'ep:goods',
-    name: 'fluent:person-feedback-48-regular',
+    name: 'Feedback',
     url: '/feedback',
 },
 {
