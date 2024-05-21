@@ -27,7 +27,7 @@ export const MENU_DATA: IMenuItem[] = [{
 {
     icon: 'mingcute:group-line',
     name: 'Customers',
-    url: '/Customers',
+    url: '/customers',
 },
 {
     icon: 'ep:goods',
