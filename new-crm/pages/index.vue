@@ -13,6 +13,10 @@ const sourceColumnRef = ref<IColumn | null>(null)
 
 const {data, isLoading, refetch} = useKanbanQuery()
         
+watchEffect(()=> {
+    console.log('Data:', data.value)
+})
+
 </script>
 <template>
     <div class="p-10">
