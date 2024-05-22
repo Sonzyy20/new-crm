@@ -11,6 +11,10 @@ const sourceColumnRef = ref<IColumn | null>(null)
 
 const {data, isLoading, refetch} = useKanbanQuery()
         
+watchEffect(()=> {
+    console.log('Data:', data.value)
+})
+
 </script>
 <template>
     <div class="p-10">
@@ -18,7 +22,7 @@ const {data, isLoading, refetch} = useKanbanQuery()
         <div v-if="isLoading">Loading ...</div>
         <div v-else>
             <div class="grid grid-cols-5 gap-16">
-                <div v-for="(column, index) in data" :key="column.id">                   
+                <div v-for="(column) in data" :key="column.id">                   
                     <div class="rounded bg-slate-700 py-1 px-5 mb-2 text-center">
                         {{ column.name }}
                     </div>
