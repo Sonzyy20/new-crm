@@ -5,7 +5,7 @@ import type { ICard } from "./kanban.type"
 import type { iDeal } from "~/types/deals.types"
 
 export function useKanbanQuery(){
-    //todo
+    
     return useQuery({
         queryKey: ['deals'],
         queryFn: () => DB.listDocuments(DB_ID, COLLECTION_DEALS),
@@ -17,7 +17,7 @@ export function useKanbanQuery(){
                 const colunmn = newBoard.find(col => col.id === deal.status)
                 if (colunmn) {
                     colunmn.items.push({
-                        $createdAt: deal.$createAt,
+                        $createdAt: deal.$createdAt,
                         id: deal.$id,
                         name: deal.name ,
                         price: deal.price ,

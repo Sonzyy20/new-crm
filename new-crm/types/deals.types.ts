@@ -1,5 +1,5 @@
 export interface IBaseField {
-    $createAt: string
+    $createdAt: string
     $id: string
 }
 
