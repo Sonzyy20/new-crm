@@ -18,6 +18,10 @@ watchEffect(()=> {
 })
 
 </script>
+
+<!--TODO: create deal-->
+<!--TODO: DND cards-->
+
 <template>
     <div class="p-10">
         <h1 class="font-bold text-2x1 mb-10">CRM System</h1>
@@ -29,10 +33,15 @@ watchEffect(()=> {
                         {{ column.name }}
                     </div>
                     <div>
+                        <kanbanCreateDeal :refetch="refetch" :status="column.id" />
                         <UiCard v-for="card in column.items" :key="card.id" class="mb-3" draggable="ture">
-                            <UiCardHeader role="button">{{ card.name }}</UiCardHeader>
-                            <UiCardDescription>{{ convertreCurrynce(card.price) }}</UiCardDescription>
-                            <UiCardContent>Company: {{ card.companyName }}</UiCardContent>
+                            <UiCardHeader role="button">
+                                <UiCardTitle>                                    
+                                    {{ card.name }}
+                                </UiCardTitle>
+                                <UiCardDescription class="mt-1">{{ convertreCurrynce(card.price) }}</UiCardDescription>
+                            </UiCardHeader>
+                            <UiCardContent class="text-xs">Company: {{ card.companyName }}</UiCardContent>
                             <UiCardFooter> {{ dayjs(card.$createdAt).format('DD MMMM YYYY') }}</UiCardFooter>
                             
                         </UiCard>

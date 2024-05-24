@@ -22,7 +22,7 @@ export enum EnumStatus {
     'done' = 'done'
 }
 
-export interface iDeal extends IBaseField {
+export interface IDeal extends IBaseField {
     comments: IComment[]
     customer: ICustomer
     name: string
