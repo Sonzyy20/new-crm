@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useMutation } from '@tanstack/vue-query';
-import { ID } from 'appwrite';
 import {v4 as uuid} from 'uuid'
 import { defineProps } from 'vue';
 import { COLLECTION_DEALS, DB_ID } from '~/app.constants';
@@ -10,9 +10,10 @@ import type { IDeal } from '~/types/deals.types';
 const isOpenForm = ref(false)
 interface IDealFormState extends Pick<IDeal, 'name' | 'price'>
 {
+    price: number,
     customer:{
-        email:String
-        name:string
+        email: string
+        name: string
     }
     status: string
 }
@@ -30,7 +31,7 @@ const props = defineProps({
 const {handleSubmit, defineField, handleReset} = useForm<IDealFormState>({
     initialValues:{
         status: props.status
-    }
+    },
 })
 
 const [name, nameAttrs] = defineField('name')
@@ -42,14 +43,21 @@ const {mutate, isPending} = useMutation({
     mutationKey: ['create a new Deal'],
     mutationFn: (data: IDealFormState) => 
     DB.createDocument(DB_ID, COLLECTION_DEALS, uuid(), data),
-    onSuccess(){
+    onSuccess() {
         props.refetch && props.refetch()
         handleReset()
-    }
+    },
 })
 
 const onSubmit = handleSubmit(values => {
-    mutate(values)
+    // mutate(values)
+    const priceInt = parseInt(values.price as unknown as string, 10);
+  if (isNaN(priceInt)) {
+    console.error('Price must be a valid integer');
+    return;
+  }
+  const data = { ...values, price: priceInt };
+  mutate(data);
 })
 
 </script>
