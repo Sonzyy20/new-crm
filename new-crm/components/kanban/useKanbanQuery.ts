@@ -3,7 +3,7 @@ import { COLLECTION_DEALS, DB_ID } from "~/app.constants"
 import { KANBAN_DATA } from "./kanban.data"
 import type { ICard } from "./kanban.type"
 import type {IColumn} from "./kanban.type"
-import type { iDeal } from "~/types/deals.types"
+import type { IDeal } from "~/types/deals.types"
 
 export function useKanbanQuery(){
     
@@ -12,13 +12,13 @@ export function useKanbanQuery(){
         queryFn: () => DB.listDocuments(DB_ID, COLLECTION_DEALS),
         select(data) {
             const newBoard = [...KANBAN_DATA]
-            const deals = data.documents as unknown as iDeal[]
+            const deals = data.documents as unknown as IDeal[]
             
             for(const deal of deals){
                 const colunmn = newBoard.find(col => col.id === deal.status)
                 if (colunmn) {
                     colunmn.items.push({
-                        $createdAt: deal.$createdAt,
+                        $createdAt: deal.$createAt,
                         id: deal.$id,
                         name: deal.name ,
                         price: deal.price ,
