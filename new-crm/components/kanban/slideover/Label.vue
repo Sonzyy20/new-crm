@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import {defineProps} from 'vue'
+
+
+</script>
 
 <template>
     <div class="mb-3">
