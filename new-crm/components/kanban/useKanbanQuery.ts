@@ -11,11 +11,9 @@ export function useKanbanQuery(){
         queryKey: ['deals'],
         queryFn: () => DB.listDocuments(DB_ID, COLLECTION_DEALS),
         select(data) {
-            // const newBoard = [...KANBAN_DATA]
-            
             const newBoard: IColumn[] = KANBAN_DATA.map(column => ({
-                ...column,
-                items:[],
+				...column,
+				items: [],
             }))
             const deals = data.documents as unknown as IDeal[]
             
