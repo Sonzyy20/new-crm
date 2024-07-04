@@ -7,6 +7,9 @@ import { useMutation } from '@tanstack/vue-query';
 import type { EnumStatus } from '~/types/deals.types';
 import { COLLECTION_DEALS, DB_ID } from '~/app.constants';
 import { generateColumnStyle } from '~/components/kanban/generate-gradient';
+// import { KanbanSlideover } from '~/components/kanban/slideover/SliderOver.vue';
+
+import { useDealSliderStore } from '#imports';
 
 useSeoMeta({
     title: 'Home | CRM system '
@@ -16,6 +19,7 @@ const dragCardRef = ref<ICard | null>(null)
 const sourceColumnRef = ref<IColumn | null>(null)
 
 const {data, isLoading, refetch} = useKanbanQuery()
+const store = useDealSliderStore()
         
 watchEffect(()=> {
     console.log('Data:', data.value)
@@ -77,7 +81,7 @@ function handleDrop (targetColumn: IColumn) {
                         <UiCard v-for="card in column.items" :key="card.id" class="mb-3" draggable="true"
                         @dragstart="()=> handleDragStart(card, column)"
                         >
-                            <UiCardHeader role="button">
+                            <UiCardHeader role="button" @click='store.set(card)'>
                                 <UiCardTitle>                                    
                                     {{ card.name }}
                                 </UiCardTitle>
@@ -90,10 +94,10 @@ function handleDrop (targetColumn: IColumn) {
                     </div>
                 </div>
             </div>
+            <KanbanSlideover/>
         </div>
     </div>
 </template>
-
 
 <style lang="scss" scoped>
 
