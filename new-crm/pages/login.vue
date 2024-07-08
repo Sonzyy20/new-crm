@@ -25,6 +25,9 @@ const login = async() => {
             status: response.status
         })
     }
+    else{
+        return (abortNavigation('Insufficient permissions.'), console.log('relog please'))
+    }
 
 
     emailRef.value = ''
@@ -50,7 +53,7 @@ const login = async() => {
             <form>
                 <UiInput placeholder="Email" type="email" class="mb-3"
                 v-model="emailRef" />
-                <UiInput placeholder="Passwprd" type="password" class="mb-3"
+                <UiInput placeholder="Password" type="password" class="mb-3"
                 v-model="passwordRef" />
                 <UiInput placeholder="Name" type="name" class="mb-3"
                 v-model="nameRef" />
