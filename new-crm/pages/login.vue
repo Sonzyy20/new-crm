@@ -25,6 +25,9 @@ const login = async() => {
             status: response.status
         })
     }
+    else{
+        return (abortNavigation('Insufficient permissions.'), console.log('relog please'))
+    }
 
 
     emailRef.value = ''
