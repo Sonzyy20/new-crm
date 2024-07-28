@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOptions, useQuery } from '@tanstack/vue-query';
+import { useQuery } from '@tanstack/vue-query';
 import { COLLECTION_CUSTOMERS, DB_ID } from '~/app.constants';
 import type { ICustomer } from '~/types/deals.types';
 
@@ -8,14 +8,13 @@ useSeoMeta ({
 })
 
 
-const {data, isLoading} = useQuery({
+const {data: customers, isLoading} = useQuery({
     queryKey: ['customers'],
-    queryFn: () => { DB.listDocuments(DB_ID, COLLECTION_CUSTOMERS)
-
-    }
+    queryFn: () =>  DB.listDocuments(DB_ID, COLLECTION_CUSTOMERS) as unknown as ICustomer[]
+    
 })         
 
-const customers = (data?.value?.documents as unknown as ICustomer[])
+
 </script>
 
 <template>
@@ -26,7 +25,7 @@ const customers = (data?.value?.documents as unknown as ICustomer[])
     <UiTable  v-else>
         <UiTableHeader>
             <UiTableRow>
-                <UiTableHead class="w-[80px]">
+                <UiTableHead class="w-[100px]">
                     image
                 </UiTableHead>
                 <UiTableHead class="w-[200px]">
@@ -41,7 +40,7 @@ const customers = (data?.value?.documents as unknown as ICustomer[])
             </UiTableRow>
         </UiTableHeader>
         <UiTableBody>
-            <UiTableRow v-for="customer in customers" :key="customer.$id">
+            <UiTableRow v-for="customer in (customers?.documents as unknown as ICustomer[])" :key="customer.$id">
                 
                 <UiTableCell>
                     <NuxtLink :href="`/customers/edit/${customer.$id}`">
